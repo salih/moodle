@@ -224,7 +224,7 @@ function book_get_toc($chapters, $chapter, $book, $cm, $edit) {
         foreach ($chapters as $ch) {
             $i++;
             $title = trim(format_string($ch->title, true, array('context'=>$context)));
-            $linkTitle = trim($ch->title);
+            $linkTitle = trim(html_entity_decode($ch->title));
             if (!$ch->subchapter) {
 
                 if ($first) {
@@ -277,7 +277,7 @@ function book_get_toc($chapters, $chapter, $book, $cm, $edit) {
             if ($ch->id == $chapter->id) {
                 $toc .= html_writer::tag('strong', $title);
             } else {
-                $toc .= html_writer::link(new moodle_url('view.php', array('id' => $cm->id, 'chapterid' => $ch->id)), $title, array('title' => html_entity_decode($linkTitle)));
+                $toc .= html_writer::link(new moodle_url('view.php', array('id' => $cm->id, 'chapterid' => $ch->id)), $title, array('title' => $linkTitle));
             }
 
             $toc .= html_writer::start_tag('div', array('class' => 'action-list'));
@@ -326,7 +326,7 @@ function book_get_toc($chapters, $chapter, $book, $cm, $edit) {
         $toc .= html_writer::start_tag('ul');
         foreach ($chapters as $ch) {
             $title = trim(format_string($ch->title, true, array('context'=>$context)));
-            $linkTitle = trim($ch->title);
+            $linkTitle = trim(html_entity_decode($ch->title));
             if (!$ch->hidden) {
                 if (!$ch->subchapter) {
                     $nch++;
@@ -361,7 +361,7 @@ function book_get_toc($chapters, $chapter, $book, $cm, $edit) {
                 if ($ch->id == $chapter->id) {
                     $toc .= html_writer::tag('strong', $title);
                 } else {
-                    $toc .= html_writer::link(new moodle_url('view.php', array('id' => $cm->id, 'chapterid' => $ch->id)), $title, array('title' => html_entity_decode($linkTitle)));
+                    $toc .= html_writer::link(new moodle_url('view.php', array('id' => $cm->id, 'chapterid' => $ch->id)), $title, array('title' => $linkTitle ));
                 }
 
                 if (!$ch->subchapter) {
